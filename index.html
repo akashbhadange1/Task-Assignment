@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us Page</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Internal styles -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ffffff;
+    }
+
+    .contact-section {
+      background: #f9f9f9;
+      padding: 60px 0;
+    }
+
+    /* Style for the form container */
+    .form-container {
+      background: #fff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-intro {
+      background-color: #ffffff; 
+      padding: 20px; 
+      border-radius: 8px; 
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+       margin-bottom: 20px;
+       margin-top: 20px; 
+    }
+
+    .form-intro div {
+      margin-left: 20px;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 30px;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      border: none;
+      border-bottom: 2px solid #ccc;
+      border-radius: 0;
+      padding: 10px 5px;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-bottom-color: #007bff;
+    }
+
+    /* Styling for form labels */
+    .form-group label {
+      position: absolute;
+      top: 10px;
+      left: 5px;
+      font-size: 16px;
+      color: #aaa;
+      pointer-events: none;
+      transition: all 0.3s;
+    }
+
+    .form-group input:focus + label,
+    .form-group input:not(:placeholder-shown) + label,
+    .form-group textarea:focus + label,
+    .form-group textarea:not(:placeholder-shown) + label {
+      top: -20px;
+      left: 0;
+      font-size: 12px;
+      color: #007bff;
+    }
+
+    .btn-round {
+      border-radius: 20px;
+    }
+
+    .btn-round span {
+      margin-left: 5px;
+    }
+
+    .btn-small {
+      padding: 5px 10px; 
+      font-size: 14px;
+    }
+
+    .map-section {
+      position: relative;
+      height: 400px;
+      margin-top: 40px;
+    }
+
+    /* Styling for map info */
+    .map-info {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #1a237e;
+      color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .image-section {
+      background: #f0f0f0;
+      padding: 60px 0;
+    }
+
+    .image-section .col {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .image-section .img-container {
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+    }
+
+    .image-section .img-container img {
+      width: 100%;
+      transition: transform 0.5s ease;
+    }
+
+    .image-section .img-container:hover img {
+      transform: scale(1.1);
+      filter: blur(4px);
+    }
+
+    .image-section .img-container p {
+      position: absolute;
+      top: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 5px 10px;
+      border-radius: 5px;
+    }
+
+    @media (max-width: 768px) {
+  .image-section .col {
+    flex-basis: 50%; 
+  }
+  }
+
+
+    .footer-section {
+      background: #0d47a1;
+      padding: 40px 0;
+      color: #fff;
+    }
+
+    .footer-section .col {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .footer-section .col.text-left p {
+  margin-top: 100px;
+    }
+
+
+    .alert {
+      display: none;
+    }
+
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      max-width: 120px;
+    }
+  </style>
+</head>
+
+<body>
+  <img src="images/logo.png" alt="Logo" class="logo">
+  <!-- Contact section -->
+  <div class="container contact-section">
+    <div class="row justify-content-center">
+      <div class="col-lg-4">
+        <div class="form-intro">
+          <div>
+            <h2>Got any questions?</h2>
+            <p>Let's discuss it over a cup of coffee.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Form container -->
+      <div class="col-lg-8 form-container">
+        <form id="contactForm" action="form.php" method="POST">
+          <input type="hidden" name="csrf_token" value="<?php echo $_SESSION['csrf_token']; ?>">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input type="text" class="form-control" id="name" name="name" required placeholder=" ">
+              <label for="name">Name</label>
+              <div class="invalid-feedback">Please enter your name.</div>
+            </div>
+            <div class="form-group col-md-6">
+              <input type="text" class="form-control" id="organization" name="organization" required placeholder=" ">
+              <label for="organization">Organization Name</label>
+              <div class="invalid-feedback">Please enter your organization name.</div>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <input type="email" class="form-control" id="email" name="email" required placeholder=" ">
+              <label for="email">Email ID</label>
+              <div class="invalid-feedback">Please enter a valid email address.</div>
+            </div>
+            <div class="form-group col-md-6">
+              <input type="text" class="form-control" id="contact" name="contact" required placeholder=" ">
+              <label for="contact">Contact Number</label>
+              <div class="invalid-feedback">Please enter your contact number.</div>
+            </div>
+          </div>
+          <div class="form-group">
+            <textarea class="form-control" id="message" name="message" rows="5" required placeholder=" "></textarea>
+            <label for="message">Message</label>
+            <div class="invalid-feedback">Please enter your message.</div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-round btn-small">
+            Submit <span>&rarr;</span>
+          </button>
+        </form>
+        <!-- Success message -->
+        <div id="successMessage" class="alert alert-success mt-3">
+          Your message has been sent successfully!
+        </div>
+      </div>
+    </div>
+  </div>
+   <!-- Map section -->
+  <div class="container-fluid map-section">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3770.0741498401366!2d73.00820837564162!3d19.079148081225733!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be8217cd87c8f2d%3A0xf2441d89731a2ec0!2sMIDC%20Industrial%20Area%2C%20Rabale%2C%20Navi%20Mumbai%2C%20Maharashtra%20400701!5e0!3m2!1sen!2sin!4v1592190247673!5m2!1sen!2sin"
+      width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false"
+      tabindex="0"></iframe>
+    <div class="map-info">
+      <h4>OnestopNDT</h4>
+      <p>PAP/R/406 Rabale MIDC Near Dol Electric Company Rabal MIDC, Navi Mumbai - 400701.</p>
+      <p>Landline: 022 4131 0099</p>
+      <a href="https://maps.app.goo.gl/m17PDuVDQkKXcbAR7" target="_blank" class="btn btn-light"><img src="images/map.png" alt="Logo"
+          style="max-width: 20px;">Google Map Link</a>
+    </div>
+  </div>
+  <!-- Image section -->
+  <div class="container-fluid image-section">
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="img-container">
+            <p>Companies</p>
+            <img src="images/companies.jpg" alt="Companies">
+          </div>
+        </div>
+        <div class="col">
+          <div class="img-container">
+            <p>Jobs</p>
+            <img src="images/jobs.jpg" alt="Jobs">
+          </div>
+        </div>
+        <div class="col">
+          <div class="img-container">
+            <p>Articles</p>
+            <img src="images/articles.jpg" alt="Articles">
+          </div>
+        </div>
+        <div class="col">
+          <div class="img-container">
+            <p>Webinars</p>
+            <img src="images/webinars.jpg" alt="Webinars">
+          </div>
+        </div>
+        <div class="col">
+          <div class="img-container">
+            <p>Forums</p>
+            <img src="images/forums.jpg" alt="Forums">
+          </div>
+        </div>
+        <div class="col">
+          <div class="img-container">
+            <p>Application Notes</p>
+            <img src="images/application.jpg" alt="Application Notes">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Footer section -->
+  <div class="container-fluid footer-section">
+    <div class="container">
+      <div class="row mt-3">
+        <div class="col text-left">
+          <p>What is One Stop NDT?</p>
+        </div>
+        <div class="col text-right">
+          <img src="images/logo.png" alt="Logo" style="max-width: 150px;">
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      $("#contactForm").on("submit", function (event) {
+        event.preventDefault();
+        var form = $(this);
+        $.ajax({
+          url: form.attr("action"),
+          type: form.attr("method"),
+          data: form.serialize(),
+          success: function (response) {
+            console.log(response);  
+            if (response === "success") {
+              form.trigger("reset");
+              $("#successMessage").show();
+              setTimeout(function () {
+                $("#successMessage").hide();
+              }, 5000);
+            } else {
+              try {
+                var errors = JSON.parse(response);
+                for (var field in errors) {
+                  $("#" + field).addClass("is-invalid");
+                  $("#" + field).siblings(".invalid-feedback").text(errors[field]);
+                }
+              } catch (e) {
+                console.error("Invalid JSON response: ", response);
+              }
+            }
+          },
+          error: function (xhr, status, error) {
+            console.error("An error occurred: " + status + " " + error);
+            console.log(xhr.responseText);
+          }
+        });
+      });
+      $("input, textarea").on("input", function () {
+        $(this).removeClass("is-invalid");
+      });
+    });
+  </script>
+</body>
+
+</html>
